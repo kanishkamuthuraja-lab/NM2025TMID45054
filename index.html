@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FitFlex - Personal Fitness Companion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f3f5;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .fitness-app {
+      max-width: 500px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #ecf9ec;
+      border: 1px solid #28a745;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💪 FitFlex: Your Fitness Companion</h1>
+
+  <div class="fitness-app">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label for="workout">Workout Type:</label>
+    <select id="workout">
+      <option value="running">Running</option>
+      <option value="cycling">Cycling</option>
+      <option value="yoga">Yoga</option>
+      <option value="strength">Strength Training</option>
+    </select>
+
+    <label for="duration">Duration (minutes):</label>
+    <input type="number" id="duration" placeholder="Enter workout time">
+
+    <button onclick="calculateCalories()">Track Workout</button>
+
+    <div id="output" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    function calculateCalories() {
+      let name = document.getElementById("name").value;
+      let workout = document.getElementById("workout").value;
+      let duration = parseInt(document.getElementById("duration").value);
+
+      if (name === "" || isNaN(duration) || duration <= 0) {
+        alert("Please enter valid details!");
+        return;
+      }
+
+      let caloriesPerMinute = {
+        running: 10,
+        cycling: 8,
+        yoga: 4,
+        strength: 6
+      };
+
+      let calories = duration * caloriesPerMinute[workout];
+
+      let message = `
+        Hi <b>${name}</b>!<br>
+        You did <b>${duration} minutes</b> of <b>${workout}</b>.<br>
+        🔥 Calories Burned: <b>${calories}</b>
+      `;
+
+      let outputDiv = document.getElementById("output");
+      outputDiv.style.display = "block";
+      outputDiv.innerHTML = message;
+    }
+  </script>
+
+</body>
+</html>
